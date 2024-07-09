@@ -1,6 +1,9 @@
 "use server";
 
-async function getAppAccessToken() {
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
+
+export async function getAppAccessToken() {
   const res = await fetch(
     `https://open.larksuite.com/open-apis/auth/v3/app_access_token/internal`,
     {
@@ -29,7 +32,7 @@ async function getAppAccessToken() {
   return data.app_access_token;
 }
 
-async function getUserAccessToken(code: string) {
+export async function getUserAccessToken(code: string) {
   const res = await fetch(
     `https://open.larksuite.com/open-apis/authen/v1/oidc/access_token`,
     {
@@ -67,6 +70,18 @@ async function getUserAccessToken(code: string) {
   return data.data.access_token;
 }
 
+export type SessionTokenData = {
+  token: string;
+};
+
+export async function getIronSessionData<T extends object>() {
+  const session = await getIronSession<T>(cookies(), {
+    password: `${process.env.COOKIE_PASSWORD}`,
+    cookieName: `${process.env.COOKIE_NAME}`,
+  });
+  return session;
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
@@ -74,6 +89,11 @@ export async function GET(request: Request) {
   if (!code) {
     throw new Error("no code in search params");
   }
-
-  return Response.json({ token: await getUserAccessToken(code) });
+  // get user token by code
+  const data = await getUserAccessToken(code);
+  // save in session
+  const session = await getIronSessionData<SessionTokenData>();
+  session.token = data;
+  await session.save();
+  return Response.json({ token: data });
 }
