@@ -24,7 +24,7 @@ export default function BreadcrumbComponent({ menu }: Props) {
     const pathArr = findPathByKey(temp, id as string);
     const itemList: ItemType[] = pathArr?.map(ele => {
       let obj: any = {};
-      obj.href = `/${ele.obj_token}`;
+      obj.href = `/node/${ele.node_token}`;
       obj.title = <span>{ele.title}</span>;
       return obj;
     })!;

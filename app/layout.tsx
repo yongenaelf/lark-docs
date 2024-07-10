@@ -62,7 +62,7 @@ export default async function RootLayout({
           <main className="flex-1">
             <div className="border-b">
               <Header menu={menu} />
-              <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+              <div className="pt-[50px] container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
                 <Sidebar menu={menu} />
                 <div>
                   <Breadcrumb menu={menu}></Breadcrumb>

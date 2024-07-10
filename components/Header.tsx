@@ -20,7 +20,7 @@ export default function Header({ menu }: Props) {
   const items = menu.items;
   const menuItems: MenuItem[] = items.map(ele => {
     let obj: any = {};
-    obj.label = <Link href={`/${ele.obj_token}`}>{ele.title}</Link>;
+    obj.label = <Link href={`/node/${ele.node_token}`}>{ele.title}</Link>;
     obj.key = ele.node_token;
     return obj;
   });
@@ -31,6 +31,7 @@ export default function Header({ menu }: Props) {
   };
   return (
     <Menu
+      className="fixed w-full bg-white"
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"

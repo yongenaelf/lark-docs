@@ -49,7 +49,7 @@ export default function Sidebar({ menu }: Props) {
   // not use the original open/close
   const renderTitle = (title: string, key: string, hasChild: boolean) => (
     <div className="flex items-center justify-between">
-      <Link href={`/${key}`} className="w-[90%]">
+      <Link href={`/node/${key}`} className="w-[90%]">
         <span>{title}</span>
       </Link>
       {hasChild &&
@@ -77,10 +77,10 @@ export default function Sidebar({ menu }: Props) {
     const arr = [];
     for (let i = 0; i < items?.length; i++) {
       let obj: any = {
-        key: items[i].obj_token,
+        key: items[i].node_token,
         label: renderTitle(
           items[i].title,
-          items[i].obj_token,
+          items[i].node_token,
           items[i].has_child
         ),
       };
@@ -98,7 +98,7 @@ export default function Sidebar({ menu }: Props) {
 
   useEffect(() => {
     const defaultOpenKeys = findPathByKey(temp, id as string)?.map(
-      ele => ele.obj_token
+      ele => ele.node_token
     );
     setOpenKeys(defaultOpenKeys!);
   }, [id]);

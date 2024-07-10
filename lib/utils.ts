@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export function findTopLevelItems(data: NodesData, key: string) {
   function search(items: NodesItem[], key: string) {
     for (let item of items) {
-      if (item.obj_token === key) {
+      if (item.node_token === key) {
         return true;
       }
       if (item.children) {
@@ -34,7 +34,7 @@ export function findPathByKey(data: NodesData, key: string) {
 
   function find(items: NodesItem[]) {
     for (let item of items) {
-      if (item.obj_token === key) {
+      if (item.node_token === key) {
         path.push(item);
         return true;
       } else if (item.has_child && item.children.length > 0) {
