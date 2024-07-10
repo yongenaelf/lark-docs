@@ -13,7 +13,7 @@ export default async function Redirect() {
     async function setSessionToken(code: string) {
       const res = await fetch(`/api/token?code=${code}`);
       const data = await res.json();
-      window.sessionStorage.setItem("session", data.token);
+      // window.sessionStorage.setItem("session", data.token);
     }
 
     if (!!code && !mounted.current) {
@@ -21,9 +21,9 @@ export default async function Redirect() {
       mounted.current = true;
     }
 
-    return () => {
-      window.sessionStorage.removeItem("session");
-    };
+    // return () => {
+    //   window.sessionStorage.removeItem("session");
+    // };
   }, [code]);
 
   return <p>Loading...</p>;
