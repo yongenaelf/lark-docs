@@ -9,7 +9,7 @@ async function getData(id: string) {
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${session.token}`,
+        Authorization: `Bearer ${process.env.USER_TOKEN}`,
       },
       next: { revalidate: 1 },
     }
