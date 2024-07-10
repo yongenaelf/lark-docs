@@ -1,3 +1,5 @@
+import { AnyItem } from "./renderer";
+
 export interface Element {
   text_run: {
     content: string;
@@ -14,6 +16,7 @@ export interface Element {
 export interface Item {
   block_id: string;
   parent_id: string;
+  allItems: AnyItem[];
 }
 
 export interface TextStyle {

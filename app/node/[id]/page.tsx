@@ -73,8 +73,9 @@ export default async function Document({
   return (
     <main>
       {data?.items.map((item: AnyItem) => (
-        <Renderer key={item.block_id} {...item} />
+        <Renderer key={item.block_id} {...item} allItems={data.items} />
       ))}
+      <pre>{JSON.stringify(data.items, undefined, 2)}</pre>
     </main>
   );
 }
