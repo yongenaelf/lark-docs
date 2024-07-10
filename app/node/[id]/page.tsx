@@ -1,4 +1,4 @@
-import Renderer, { AnyItem } from "@/components/renderer";
+import Renderer, { AnyItem } from "@/components/blocks/renderer";
 
 interface NodeData {
   node: {
