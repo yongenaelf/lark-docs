@@ -72,11 +72,11 @@ async function getData() {
 const MenuItem = ({ item }: { item: NodesItem }) => {
   return (
     <li>
-      {item.title}
+      <Link href={`/node/${item.node_token}`}>{item.title}</Link>
       {item.has_child && item.children?.length > 0 && (
         <ul>
-          {item.children.map(ele => {
-            return ele.items.map(element => {
+          {item.children.map((ele) => {
+            return ele.items.map((element) => {
               return <MenuItem item={element} />;
             });
           })}
