@@ -2,10 +2,8 @@ import { Item } from "./common";
 import Renderer from "./renderer";
 
 export interface Quote extends Item {
-  block_id: string;
   block_type: 34;
   children: string[];
-  parent_id: string;
   quote_container: {};
 }
 

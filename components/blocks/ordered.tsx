@@ -1,3 +1,4 @@
+import { key } from "@/lib/utils";
 import { Item, TextStyle, Element } from "./common";
 
 export interface Ordered extends Item {
@@ -10,10 +11,10 @@ export interface Ordered extends Item {
 
 export function Ordered(props: Ordered) {
   return (
-    <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">
-      {props.ordered.elements.map((i, index) => (
-        <li key={index}>{i.text_run.content}</li>
+    <li>
+      {props.ordered.elements.map((i) => (
+        <Element key={key()} {...i} />
       ))}
-    </ol>
+    </li>
   );
 }
