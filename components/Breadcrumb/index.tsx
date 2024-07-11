@@ -39,5 +39,15 @@ export default function BreadcrumbComponent({ menu }: Props) {
       setItems([home, ...itemList]);
     }
   }, [id]);
-  return <>{isKeyInMenu ? <Breadcrumb items={items}></Breadcrumb> : <></>}</>;
+  return (
+    <>
+      {isKeyInMenu ? (
+        <div className="my-4">
+          <Breadcrumb items={items}></Breadcrumb>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
+  );
 }

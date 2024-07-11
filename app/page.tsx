@@ -7,7 +7,7 @@ const getChildList = (ele: NodesItem, index: number) => {
   return ele.children.map(element => {
     return element.items.map(item => {
       return (
-        <li>
+        <li className="ml-4">
           <Link href={`/node/${item.node_token}`} className="text-blue-500">
             {item.title}
           </Link>
@@ -23,10 +23,10 @@ export default async function Home() {
   const menu = await getMenu();
   return (
     <main className="p-8">
-      <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {menu.items.map((ele) => {
+      <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+        {menu.items.map(ele => {
           return (
-            <ul key={ele.node_token} className="p-4 list-disc pl-2">
+            <ul key={ele.node_token} className="m-4 list-disc ">
               <h2 className="font-bold text-xl mb-4">
                 <Link href={`/node/${ele.node_token}`}>{ele.title}</Link>
               </h2>
