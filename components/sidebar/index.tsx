@@ -26,7 +26,7 @@ const MenuItem = ({ item }: { item: NodesItem }) => {
         <ul>
           {item.children.map(ele => {
             return ele.items.map(element => {
-              return <MenuItem item={element} />;
+              return <MenuItem key={element.node_token} item={element} />;
             });
           })}
         </ul>

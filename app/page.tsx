@@ -23,10 +23,10 @@ export default async function Home() {
   const menu = await getMenu();
   return (
     <main className="p-8">
-      <div className="flex flex-wrap">
-        {menu.items.map(ele => {
+      <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {menu.items.map((ele) => {
           return (
-            <ul key={ele.node_token} className="w-1/3 p-4 list-disc pl-2">
+            <ul key={ele.node_token} className="p-4 list-disc pl-2">
               <h2 className="font-bold text-xl mb-4">
                 <Link href={`/node/${ele.node_token}`}>{ele.title}</Link>
               </h2>

@@ -38,7 +38,7 @@ export default async function RootLayout({
               <Header menu={menu} />
               <div className="pt-[50px] flex flex-row h-[calc(100vh-50px)]">
                 <Sidebar menu={menu} />
-                <div className="flex-1">
+                <div className="container mx-auto">
                   <Breadcrumb menu={menu}></Breadcrumb>
                   {children}
                 </div>
