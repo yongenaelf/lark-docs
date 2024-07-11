@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
+import { nanoid } from "nanoid";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -98,4 +99,8 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
 export async function getMenu() {
   const data = await getFileByFolderToken();
   return data;
+}
+
+export function key() {
+  return nanoid();
 }

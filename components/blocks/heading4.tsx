@@ -1,3 +1,4 @@
+import { key } from "@/lib/utils";
 import { Item, TextStyle, Element } from "./common";
 
 export interface Heading4 extends Item {
@@ -11,7 +12,9 @@ export interface Heading4 extends Item {
 export function Heading4(props: Heading4) {
   return (
     <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-      {props.heading4.elements[0].text_run.content}
+      {props.heading4.elements.map((i) => (
+        <Element key={key()} {...i} />
+      ))}
     </h4>
   );
 }
