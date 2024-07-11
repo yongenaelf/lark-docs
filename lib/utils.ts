@@ -14,7 +14,7 @@ export function findTopLevelItems(data: NodesData, key: string) {
       }
       if (item.children) {
         for (let child of item.children) {
-          if (search(child.items, key)) {
+          if (search(child.items || [], key)) {
             return true;
           }
         }
@@ -22,7 +22,7 @@ export function findTopLevelItems(data: NodesData, key: string) {
     }
     return false;
   }
-  for (let item of data.items) {
+  for (let item of data.items || []) {
     if (search([item], key)) {
       return [item];
     }
@@ -39,7 +39,7 @@ export function findPathByKey(data: NodesData, key: string) {
         return true;
       } else if (item.has_child && item.children.length > 0) {
         for (let child of item.children) {
-          if (find(child.items)) {
+          if (find(child.items || [])) {
             path.unshift(item); // Add item to the beginning of path array
             return true;
           }
@@ -48,6 +48,6 @@ export function findPathByKey(data: NodesData, key: string) {
     }
     return false;
   }
-  find(data.items);
+  find(data.items || []);
   return path.length > 0 ? path : null;
 }

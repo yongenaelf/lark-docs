@@ -40,10 +40,10 @@ export default function Sidebar({ menu }: Props) {
   const [openKeys, setOpenKeys] = useState([] as string[]);
   // click icon to open or close submenu
   const onIconClick = ({ key }: { key: string }) => {
-    if (openKeys.includes(key)) {
-      setOpenKeys(openKeys.filter(openKey => openKey !== key));
+    if (openKeys?.includes(key)) {
+      setOpenKeys(openKeys.filter((openKey) => openKey !== key));
     } else {
-      setOpenKeys([...openKeys, key]);
+      setOpenKeys([...(openKeys || []), key]);
     }
   };
   // not use the original open/close

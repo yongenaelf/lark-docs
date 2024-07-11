@@ -2,7 +2,7 @@ import { fetcher } from "../lib/api";
 
 export interface NodesData {
   has_more: boolean;
-  items: NodesItem[];
+  items?: NodesItem[];
   page_token: string;
 }
 

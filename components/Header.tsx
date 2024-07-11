@@ -18,13 +18,13 @@ export default function Header({ menu }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const items = menu.items;
-  const menuItems: MenuItem[] = items.map(ele => {
+  const menuItems: MenuItem[] = (items || []).map((ele) => {
     let obj: any = {};
     obj.label = <Link href={`/node/${ele.node_token}`}>{ele.title}</Link>;
     obj.key = ele.node_token;
     return obj;
   });
-  const [current, setCurrent] = useState(temp.items[0].node_token);
+  const [current, setCurrent] = useState(temp.items?.[0].node_token || "");
   const onClick: MenuProps["onClick"] = e => {
     console.log("click ", e);
     setCurrent(e.key);

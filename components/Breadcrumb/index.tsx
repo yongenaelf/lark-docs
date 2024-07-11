@@ -28,8 +28,8 @@ export default function BreadcrumbComponent({ menu }: Props) {
       obj.title = <span>{ele.title}</span>;
       return obj;
     })!;
-    console.log([home, ...itemList], "[home, ...itemList]");
-    setItems([home, ...itemList]);
+    console.log([home, ...(itemList || [])], "[home, ...itemList]");
+    setItems([home, ...(itemList || [])]);
   }, [id]);
   return <Breadcrumb items={items}></Breadcrumb>;
 }
