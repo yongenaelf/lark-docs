@@ -39,14 +39,8 @@ export default function Header({ menu }: Props) {
   };
   return (
     <div className="fixed w-full bg-white z-50 flex mx-5">
-      <Link href="/">
-        <Image
-          src="./aelf-logo.svg"
-          width={115}
-          height={32}
-          alt="logo"
-          className="mr-8"
-        ></Image>
+      <Link href="/" className="mr-8 flex">
+        <Image src="./aelf-logo.svg" width={115} height={32} alt="logo"></Image>
       </Link>
       <Menu
         className="w-full"
