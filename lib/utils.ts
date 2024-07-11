@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { NodesData, NodesItem } from "../services/larkServices";
+import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -40,7 +40,8 @@ export function findPathByKey(data: NodesData, key: string) {
       } else if (item.has_child && item.children.length > 0) {
         for (let child of item.children) {
           if (find(child.items)) {
-            path.unshift(item); // Add item to the beginning of path array
+            // Add item to the beginning of path array
+            path.unshift(item);
             return true;
           }
         }
@@ -50,4 +51,51 @@ export function findPathByKey(data: NodesData, key: string) {
   }
   find(data.items);
   return path.length > 0 ? path : null;
+}
+
+export function findKeyInData(data: NodesData, key: string) {
+  function search(items: NodesItem[]) {
+    for (let item of items) {
+      if (item.node_token === key) {
+        return true;
+      }
+      if (item.children) {
+        for (let child of item.children) {
+          if (search(child.items)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  return search(data.items);
+}
+
+export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
+  let data, items;
+  if (!folderNodes) {
+    data = await getNodeToken();
+    items = data.items;
+  } else {
+    items = folderNodes;
+  }
+
+  for (let i = 0; i < items.length; i++) {
+    if (!items[i].children) {
+      items[i].children = [];
+    }
+    if (items[i].has_child) {
+      const child = (await getNodeToken(items[i].node_token)) as NodesData;
+      items[i].children?.push(child);
+      await getFileByFolderToken(child.items);
+    }
+  }
+  return data as NodesData;
+}
+
+export async function getMenu() {
+  const data = await getFileByFolderToken();
+  return data;
 }

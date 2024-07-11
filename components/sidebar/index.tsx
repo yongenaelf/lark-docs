@@ -8,7 +8,11 @@ import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import "./index.css";
-import { findPathByKey, findTopLevelItems } from "../../lib/utils";
+import {
+  findKeyInData,
+  findPathByKey,
+  findTopLevelItems,
+} from "../../lib/utils";
 
 interface Props {
   menu: NodesData;
@@ -35,6 +39,7 @@ type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu }: Props) {
   const params = useParams();
   const { id } = params;
+  const [isKeyInMenu, setisKeyInMenu] = useState(false);
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const [openKeys, setOpenKeys] = useState([] as string[]);
@@ -97,24 +102,34 @@ export default function Sidebar({ menu }: Props) {
   const menuItems: MenuItem[] = getMenuList(temp);
 
   useEffect(() => {
-    const defaultOpenKeys = findPathByKey(temp, id as string)?.map(
-      ele => ele.node_token
-    );
-    setOpenKeys(defaultOpenKeys!);
+    const keyFlag = findKeyInData(menu, id as string);
+    setisKeyInMenu(keyFlag);
+    if (keyFlag) {
+      const defaultOpenKeys = findPathByKey(temp, id as string)?.map(
+        ele => ele.node_token
+      );
+      setOpenKeys(defaultOpenKeys!);
+    }
   }, [id]);
 
   return (
-    <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
-      <Menu
-        openKeys={openKeys}
-        defaultOpenKeys={openKeys}
-        inlineCollapsed={false}
-        style={{ width: 256 }}
-        defaultSelectedKeys={id}
-        mode="inline"
-        items={menuItems}
-        expandIcon={null}
-      />
-    </aside>
+    <>
+      {isKeyInMenu ? (
+        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] shrink-0 md:sticky md:block flex-none max-w-[300px]">
+          <Menu
+            openKeys={openKeys}
+            defaultOpenKeys={openKeys}
+            inlineCollapsed={false}
+            style={{ width: 256 }}
+            defaultSelectedKeys={id}
+            mode="inline"
+            items={menuItems}
+            expandIcon={null}
+          />
+        </aside>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

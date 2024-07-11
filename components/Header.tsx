@@ -1,6 +1,7 @@
 "use client";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import Image from "next/image";
 import { NodesData } from "../services/larkServices";
 import { useState } from "react";
 import Link from "next/link";
@@ -20,22 +21,37 @@ export default function Header({ menu }: Props) {
   const items = menu.items;
   const menuItems: MenuItem[] = items.map(ele => {
     let obj: any = {};
-    obj.label = <Link href={`/node/${ele.node_token}`}>{ele.title}</Link>;
+    obj.label = (
+      <Link href={`/node/${ele.node_token}`} className="font-bold">
+        {ele.title}
+      </Link>
+    );
     obj.key = ele.node_token;
     return obj;
   });
-  const [current, setCurrent] = useState(temp.items[0].node_token);
+  const [current, setCurrent] = useState(
+    temp.items && temp.items[0]?.node_token
+  );
   const onClick: MenuProps["onClick"] = e => {
     console.log("click ", e);
     setCurrent(e.key);
   };
   return (
-    <Menu
-      className="fixed w-full bg-white"
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={menuItems}
-    />
+    <div className="fixed w-full bg-white z-50 flex mx-5">
+      <Image
+        src="./aelf-logo.svg"
+        width={115}
+        height={32}
+        alt="logo"
+        className="mr-8"
+      ></Image>
+      <Menu
+        className="w-full"
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={menuItems}
+      />
+    </div>
   );
 }
