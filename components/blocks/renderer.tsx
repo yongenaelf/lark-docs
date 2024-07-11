@@ -10,6 +10,8 @@ import { Page } from "./page";
 import { Heading2 } from "./heading2";
 import { Image } from "./image";
 import { Callout } from "./callout";
+import { Tab, Tabs } from "./tabs";
+import { Synched } from "./synched";
 
 export type AnyItem =
   | Code
@@ -23,7 +25,10 @@ export type AnyItem =
   | Quote
   | Page
   | Image
-  | Callout;
+  | Callout
+  | Tabs
+  | Tab
+  | Synched;
 
 export default function Renderer(
   props: AnyItem & { allItems: AnyItem[]; nested?: boolean }
@@ -68,11 +73,17 @@ export default function Renderer(
     case 19:
       return <Callout {...props} />;
 
+    case 24:
+      return <Tabs {...props} />;
+
     case 27:
       return <Image {...props} />;
 
     case 34:
       return <Quote {...props} />;
+
+    case 999:
+      return <Synched {...props} />;
 
     default:
       return <></>;
