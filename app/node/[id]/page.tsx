@@ -75,7 +75,12 @@ export default async function Document({
       {data?.items.map((item: AnyItem) => (
         <Renderer key={item.block_id} {...item} allItems={data.items} />
       ))}
-      <pre>{JSON.stringify(data.items, undefined, 2)}</pre>
+      {process.env.NODE_ENV === "development" && (
+        <pre className="mt-5">
+          For developer use, only visible in development <br />
+          {JSON.stringify(data.items, undefined, 2)}
+        </pre>
+      )}
     </main>
   );
 }
