@@ -3,16 +3,16 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { Menu, ConfigProvider } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
-import "./index.css";
 import {
   findKeyInData,
   findPathByKey,
   findTopLevelItems,
 } from "../../lib/utils";
+import "./index.css";
 
 interface Props {
   menu: NodesData;
@@ -115,17 +115,32 @@ export default function Sidebar({ menu }: Props) {
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] shrink-0 md:sticky md:block flex-none max-w-[300px]">
-          <Menu
-            openKeys={openKeys}
-            defaultOpenKeys={openKeys}
-            inlineCollapsed={false}
-            style={{ width: 256 }}
-            defaultSelectedKeys={id}
-            mode="inline"
-            items={menuItems}
-            expandIcon={null}
-          />
+        <aside className="z-30 pl-2 shrink-0 top-[46px] block max-w-[300px] h-[calc(100vh-46px)]">
+          <ConfigProvider
+            theme={{
+              token: {
+                colorLink: "#000",
+              },
+              components: {
+                Menu: {
+                  subMenuItemBg: "#fff",
+                  itemSelectedBg: "#fff",
+                },
+              },
+            }}
+          >
+            <Menu
+              className="h-full"
+              openKeys={openKeys}
+              defaultOpenKeys={openKeys}
+              inlineCollapsed={false}
+              style={{ width: 256 }}
+              selectedKeys={[id]}
+              mode="inline"
+              items={menuItems}
+              expandIcon={null}
+            />
+          </ConfigProvider>
         </aside>
       ) : (
         <></>

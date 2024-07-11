@@ -4,7 +4,7 @@ export const fetcher = async (url: string) => {
     headers: {
       Authorization: `Bearer ${process.env.USER_TOKEN}`,
     },
-    next: { revalidate: 1 },
+    // next: { revalidate: 1 },
   });
   return res.json();
 };
