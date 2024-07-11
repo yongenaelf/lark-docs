@@ -9,6 +9,7 @@ import { Quote } from "./quote";
 import { Page } from "./page";
 import { Heading2 } from "./heading2";
 import { Image } from "./image";
+import { Callout } from "./callout";
 
 export type AnyItem =
   | Code
@@ -21,11 +22,18 @@ export type AnyItem =
   | Bullet
   | Quote
   | Page
-  | Image;
+  | Image
+  | Callout;
 
-export default function Renderer(props: AnyItem & { allItems: AnyItem[] }) {
+export default function Renderer(
+  props: AnyItem & { allItems: AnyItem[]; nested?: boolean }
+) {
   const first = props.allItems[0];
-  if (first.block_type === 1 && props.block_id !== first.block_id) {
+  if (
+    first.block_type === 1 &&
+    props.block_id !== first.block_id &&
+    !props.nested
+  ) {
     if (!first.children.includes(props.block_id)) return <></>;
   }
 
@@ -56,6 +64,9 @@ export default function Renderer(props: AnyItem & { allItems: AnyItem[] }) {
 
     case 14:
       return <Code {...props} />;
+
+    case 19:
+      return <Callout {...props} />;
 
     case 27:
       return <Image {...props} />;

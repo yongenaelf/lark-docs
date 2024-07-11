@@ -18,7 +18,8 @@ export function Element(props: Element) {
   const { bold, italic, strikethrough, underline, inline_code } =
     text_element_style;
 
-  if (inline_code) return <pre>{content}</pre>;
+  if (inline_code)
+    return <pre className="inline p-1 bg-slate-300 rounded-md">{content}</pre>;
 
   return (
     <span
@@ -27,6 +28,7 @@ export function Element(props: Element) {
         italic: italic,
         "line-through": strikethrough,
         underline: underline,
+        inline: true,
       })}
     >
       {content}
