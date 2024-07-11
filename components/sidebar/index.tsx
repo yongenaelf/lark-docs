@@ -7,7 +7,6 @@ import { Menu } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
-import "./index.css";
 import {
   findKeyInData,
   findPathByKey,
@@ -115,8 +114,9 @@ export default function Sidebar({ menu }: Props) {
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] shrink-0 md:sticky md:block flex-none max-w-[300px]">
+        <aside className="z-30 pl-2 shrink-0 top-[46px] block max-w-[300px] max-h-[calc(100vh-46px)]">
           <Menu
+            className="h-full"
             openKeys={openKeys}
             defaultOpenKeys={openKeys}
             inlineCollapsed={false}

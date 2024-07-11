@@ -34,7 +34,7 @@ async function getData(id: string) {
       headers: {
         Authorization: `Bearer ${process.env.USER_TOKEN}`,
       },
-      next: { revalidate: 1 },
+      // next: { revalidate: 1 },
     }
   );
 
@@ -52,7 +52,7 @@ async function getData(id: string) {
         headers: {
           Authorization: `Bearer ${process.env.USER_TOKEN}`,
         },
-        next: { revalidate: 1 },
+        // next: { revalidate: 1 },
       }
     );
 

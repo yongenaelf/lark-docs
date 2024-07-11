@@ -33,14 +33,16 @@ export default async function RootLayout({
         )}
       >
         <AntdRegistry>
-          <main className="flex-1">
-            <div className="border-b">
+          <main>
+            <div className="border-b flex">
               <Header menu={menu} />
-              <div className="pt-[50px] flex flex-row h-[calc(100vh-50px)]">
+              <div className="pt-[45px] flex w-full">
                 <Sidebar menu={menu} />
-                <div className="container mx-auto">
-                  <Breadcrumb menu={menu}></Breadcrumb>
-                  {children}
+                <div className="max-h-[calc(100vh-46px)] flex-1 overflow-auto">
+                  <div className="container">
+                    <Breadcrumb menu={menu}></Breadcrumb>
+                    {children}
+                  </div>
                 </div>
               </div>
             </div>
