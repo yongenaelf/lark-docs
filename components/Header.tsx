@@ -34,7 +34,6 @@ export default function Header({ menu }: Props) {
     temp.items && temp.items[0]?.node_token
   );
   const onClick: MenuProps["onClick"] = e => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
   return (
