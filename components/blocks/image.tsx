@@ -40,5 +40,12 @@ async function getLink(token: string) {
 export async function Image(props: Image) {
   const src = await getLink(props.image.token);
 
-  return <NxImage src={src} alt="" width={1200} height={1200} />;
+  return (
+    <NxImage
+      src={src}
+      alt=""
+      width={props.image.width}
+      height={props.image.height}
+    />
+  );
 }
